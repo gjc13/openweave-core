@@ -119,20 +119,20 @@ INET_ERROR UDPEndPoint::Bind(IPAddressType addrType, IPAddress addr, uint16_t po
 #endif // LWIP_VERSION_MAJOR <= 1 || LWIP_VERSION_MINOR >= 5
     }
 
-    if (res == INET_NO_ERROR)
-    {
-        if (!IsInterfaceIdPresent(intfId))
-            mUDP->intf_filter = NULL;
-        else
-        {
-            struct netif *p;
-            for (p = netif_list; p != NULL && p != intfId; p = p->next);
-            if (p == NULL)
-                res = INET_ERROR_UNKNOWN_INTERFACE;
-            else
-                mUDP->intf_filter = p;
-        }
-    }
+    //if (res == INET_NO_ERROR)
+    //{
+    //    if (!IsInterfaceIdPresent(intfId))
+    //        mUDP->intf_filter = NULL;
+    //    else
+    //    {
+    //        struct netif *p;
+    //        for (p = netif_list; p != NULL && p != intfId; p = p->next);
+    //        if (p == NULL)
+    //            res = INET_ERROR_UNKNOWN_INTERFACE;
+    //        else
+    //            mUDP->intf_filter = p;
+    //    }
+    //}
 
     // Unlock LwIP stack
     UNLOCK_TCPIP_CORE();
@@ -570,7 +570,7 @@ INET_ERROR UDPEndPoint::BindInterface(IPAddressType addrType, InterfaceId intf)
     {
         if ( !IsInterfaceIdPresent(intf) )
         { //Stop interface-based filtering.
-            mUDP->intf_filter = NULL;
+            //mUDP->intf_filter = NULL;
         }
         else
         {
@@ -588,7 +588,7 @@ INET_ERROR UDPEndPoint::BindInterface(IPAddressType addrType, InterfaceId intf)
             }
             else
             {
-                mUDP->intf_filter = netifPtr;
+                //mUDP->intf_filter = netifPtr;
             }
         }
     }
@@ -655,7 +655,7 @@ void UDPEndPoint::Init(InetLayer *inetLayer)
 InterfaceId UDPEndPoint::GetBoundInterface (void)
 {
 #if WEAVE_SYSTEM_CONFIG_USE_LWIP
-    return mUDP->intf_filter;
+    //return mUDP->intf_filter;
 #endif // WEAVE_SYSTEM_CONFIG_USE_LWIP
 
 #if WEAVE_SYSTEM_CONFIG_USE_SOCKETS

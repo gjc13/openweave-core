@@ -38,7 +38,6 @@
 #include <lwip/ip.h>
 #include <lwip/tcpip.h>
 #include <lwip/ip6.h>
-#include <lwip/ip6_route_table.h>
 #endif // WEAVE_SYSTEM_CONFIG_USE_LWIP
 
 #if WEAVE_SYSTEM_CONFIG_USE_SOCKETS

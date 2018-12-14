@@ -81,7 +81,9 @@ using namespace nl::Weave::Profiles;
 extern System::Layer SystemLayer;
 
 extern InetLayer Inet;
+#if CONFIG_BLE_PLATFORM_BLUEZ
 extern BleLayer Ble;
+#endif
 
 extern uint16_t sTestDefaultUDPSessionKeyId;
 extern uint16_t sTestDefaultTCPSessionKeyId;

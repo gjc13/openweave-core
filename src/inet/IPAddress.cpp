@@ -83,7 +83,7 @@ ip_addr_t IPAddress::ToLwIPAddr(void) const
 
     case kIPAddressType_IPv6:
         IP_SET_TYPE_VAL(ret, IPADDR_TYPE_V6);
-        *ip_2_ip6(&ret) = IPAddress::ToIPv6();
+        ret.u_addr.ip6 = IPAddress::ToIPv6();
         break;
 
     default:
@@ -162,7 +162,15 @@ IPAddress IPAddress::FromIPv4(const ip4_addr_t &ipv4Addr)
 
 ip6_addr_t IPAddress::ToIPv6() const
 {
+#if LWIP_IPV6_SCOPES
+    ip6_addr_t ipAddr;
+    memcpy(ipAddr.addr, Addr, sizeof(Addr));
+    ipAddr.zone = IP6_NO_ZONE;
+
+    return ipAddr;
+#else
     return *(ip6_addr_t *)Addr;
+#endif
 }
 
 IPAddress IPAddress::FromIPv6(const ip6_addr_t &ipv6Addr)
